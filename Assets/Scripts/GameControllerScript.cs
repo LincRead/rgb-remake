@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour {
 
+    [Header("Player ship")]
     public GameObject playerShip;
-    public Vector2 playerSpawnPoint;
+    public float playerSpawnPointX;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +17,7 @@ public class GameControllerScript : MonoBehaviour {
         Debug.Log("Inited level");
 
         // Invoke("CompletedLevel", 3f);
-        GameObject.Instantiate(playerShip, new Vector2(1.28f, 5.4f), Quaternion.identity);
+        GameObject.Instantiate(playerShip, new Vector2(playerSpawnPointX, 5.4f), Quaternion.identity);
     }
 
 	// Update is called once per frame
