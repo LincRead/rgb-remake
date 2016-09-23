@@ -62,7 +62,6 @@ public class Player : MonoBehaviour {
 
     void FireMissile(COLOR missileColor)
     {
-        Debug.Log(missileColor);
         GameObject newMissile = GameObject.Instantiate(missilePrefab,
             transform.position + new Vector3(spriteRenderer.bounds.size.x / 2, 0f, 0f),
             Quaternion.identity) as GameObject;
@@ -74,8 +73,13 @@ public class Player : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
+            Destroy();
             other.GetComponent<Enemy>().Kill();
         }
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

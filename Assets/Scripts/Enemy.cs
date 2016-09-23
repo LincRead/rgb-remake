@@ -6,20 +6,20 @@ public class Enemy : MonoBehaviour {
     public Sprite[] sprites;
     public float moveSpeed = 0.1f;
     public int HP = 1;
+    public GameObject explosionPrefab;
 
     SpriteRenderer spriteRenderer;
     COLOR enemyColor;
 
 	// Use this for initialization
 	void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        SetColor(COLOR.GREEN);
     }
 
-    void SetColor(COLOR color)
+    public void SetColor(COLOR color)
     {
         enemyColor = color;
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         switch (enemyColor)
         {
@@ -55,5 +55,8 @@ public class Enemy : MonoBehaviour {
     public void Kill()
     {
         Destroy(gameObject);
+
+        GameObject explosionEffect = GameObject.Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+        explosionEffect.GetComponent<Explosion>().CreateExplosion(enemyColor, 0.3f, 12);
     }
 }
