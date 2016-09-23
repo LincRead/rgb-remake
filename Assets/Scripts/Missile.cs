@@ -4,7 +4,7 @@ using System.Collections;
 public class Missile : MonoBehaviour {
 
     public Sprite[] sprites;
-    public float moveSpeed = 0.1f;
+    private float moveSpeed = 0.21f;
 
     SpriteRenderer spriteRenderer;
     COLOR missileColor;

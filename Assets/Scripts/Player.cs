@@ -11,12 +11,19 @@ public enum COLOR
 public class Player : MonoBehaviour {
 
     public float moveSpeed = 3f;
+
+    [Header("Missile settings")]
+    private float timeBetweenMissileFire = 0.2f;
     public GameObject missilePrefab;
+
+    float timeSinceLastMissileFire;
 
     SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start () {
+        timeSinceLastMissileFire = timeBetweenMissileFire;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -52,12 +59,16 @@ public class Player : MonoBehaviour {
 
     void HandleFireButtons()
     {
-        if (Input.GetButtonDown("Fire1"))
-            FireMissile(COLOR.GREEN);
-        if (Input.GetButtonDown("Fire2"))
-            FireMissile(COLOR.RED);
-        if (Input.GetButtonDown("Fire3"))
-            FireMissile(COLOR.BLUE);
+        timeSinceLastMissileFire += Time.deltaTime;
+        if(timeSinceLastMissileFire >= timeBetweenMissileFire)
+        {
+            if (Input.GetButton("Fire1"))
+                FireMissile(COLOR.GREEN);
+            else if (Input.GetButton("Fire2"))
+                FireMissile(COLOR.RED);
+            else if (Input.GetButton("Fire3"))
+                FireMissile(COLOR.BLUE);
+        }
     }
 
     void FireMissile(COLOR missileColor)
@@ -67,6 +78,7 @@ public class Player : MonoBehaviour {
             Quaternion.identity) as GameObject;
         newMissile.GetComponent<Missile>().SetColor(missileColor);
 
+        timeSinceLastMissileFire = 0.0f;
     }
 
     void OnTriggerEnter2D(Collider2D other)
