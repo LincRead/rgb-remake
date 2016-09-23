@@ -20,11 +20,6 @@ public class GameControllerScript : MonoBehaviour {
         GameObject.Instantiate(playerShip, new Vector2(playerSpawnPointX, 5.4f), Quaternion.identity);
     }
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     void CompletedLevel() {
         Debug.Log("COMPLETED");
         SceneManager.LoadScene("victory");
