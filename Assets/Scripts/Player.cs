@@ -14,15 +14,22 @@ public class Player : MonoBehaviour {
 
     [Header("Missile settings")]
     private float timeBetweenMissileFire = 0.2f;
+    private float currTimeBetweenMissileFire;
     public GameObject missilePrefab;
 
     float timeSinceLastMissileFire;
-
     SpriteRenderer spriteRenderer;
+
+    // PowerUp
+    PowerUp.POWERUP currPowerUp = PowerUp.POWERUP.NONE;
+    float timePowerUpsLast = 6f;
+    float timeSincePowerUpActivated = 0.0f;
+
 
     // Use this for initialization
     void Start () {
-        timeSinceLastMissileFire = timeBetweenMissileFire;
+        currTimeBetweenMissileFire = timeBetweenMissileFire;
+        timeSinceLastMissileFire = currTimeBetweenMissileFire;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -33,6 +40,7 @@ public class Player : MonoBehaviour {
         MoveShip();
         KeepWithinScreenRectangle();
         HandleFireButtons();
+        HandlePowerUps();
     }
 
     void MoveShip()
@@ -60,7 +68,7 @@ public class Player : MonoBehaviour {
     void HandleFireButtons()
     {
         timeSinceLastMissileFire += Time.deltaTime;
-        if(timeSinceLastMissileFire >= timeBetweenMissileFire)
+        if(timeSinceLastMissileFire >= currTimeBetweenMissileFire)
         {
             if (Input.GetButton("Fire1"))
                 FireMissile(COLOR.GREEN);
@@ -71,12 +79,46 @@ public class Player : MonoBehaviour {
         }
     }
 
+    void HandlePowerUps()
+    {
+        if(currPowerUp != PowerUp.POWERUP.NONE)
+        {
+            timeSincePowerUpActivated += Time.deltaTime;
+            if (timeSincePowerUpActivated >= timePowerUpsLast)
+            {
+                currPowerUp = PowerUp.POWERUP.NONE;
+            }
+        }
+
+        if (currPowerUp == PowerUp.POWERUP.FAST)
+            currTimeBetweenMissileFire = timeBetweenMissileFire / 2;
+        else
+            currTimeBetweenMissileFire = timeBetweenMissileFire;
+    }
+
     void FireMissile(COLOR missileColor)
     {
         GameObject newMissile = GameObject.Instantiate(missilePrefab,
             transform.position + new Vector3(spriteRenderer.bounds.size.x / 2, 0f, 0f),
             Quaternion.identity) as GameObject;
         newMissile.GetComponent<Missile>().SetColor(missileColor);
+
+        if(currPowerUp == PowerUp.POWERUP.TRIPPLE)
+        {
+            // Up
+            newMissile = GameObject.Instantiate(missilePrefab,
+            transform.position + new Vector3(spriteRenderer.bounds.size.x / 2, 0f, 0f),
+            Quaternion.identity) as GameObject;
+            newMissile.GetComponent<Missile>().SetColor(missileColor);
+            newMissile.GetComponent<Missile>().SetVelocityY(5f);
+
+            // Down
+            newMissile = GameObject.Instantiate(missilePrefab,
+            transform.position + new Vector3(spriteRenderer.bounds.size.x / 2, 0f, 0f),
+            Quaternion.identity) as GameObject;
+            newMissile.GetComponent<Missile>().SetColor(missileColor);
+            newMissile.GetComponent<Missile>().SetVelocityY(-5f);
+        }
 
         timeSinceLastMissileFire = 0.0f;
     }
@@ -88,10 +130,42 @@ public class Player : MonoBehaviour {
             Destroy();
             other.GetComponent<Enemy>().Kill();
         }
+
+        if (other.gameObject.tag == "PowerUp")
+        {
+            switch(other.gameObject.GetComponent<PowerUp>().GetPowerUpType())
+            {
+                case PowerUp.POWERUP.FAST:
+                    currPowerUp = PowerUp.POWERUP.FAST;
+                    timeSincePowerUpActivated = 0.0f;
+                    break;
+
+                case PowerUp.POWERUP.TRIPPLE:
+                    currPowerUp = PowerUp.POWERUP.TRIPPLE;
+                    timeSincePowerUpActivated = 0.0f;
+                    break;
+
+                case PowerUp.POWERUP.BOMB:
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                    foreach(GameObject e in enemies)
+                        e.GetComponent<Enemy>().Kill();
+
+                    currPowerUp = PowerUp.POWERUP.NONE;
+                    break;
+
+                default:
+                    currPowerUp = PowerUp.POWERUP.NONE;
+                    break;
+
+            }
+
+            other.GetComponent<PowerUp>().Kill();
+        }
     }
 
     public void Destroy()
     {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControllerScript>().GameOver();
         Destroy(gameObject);
     }
 }

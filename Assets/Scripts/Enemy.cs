@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void MoveEnemy()
     {
-        transform.position = new Vector3(transform.position.x - moveSpeed, transform.position.y, transform.position.z);
+        transform.position -= new Vector3(moveSpeed * Time.deltaTime, 0.0f, 0.0f);
     }
 
     public void Damage(COLOR missileColor, int damage)

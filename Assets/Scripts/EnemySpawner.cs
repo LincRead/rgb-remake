@@ -26,7 +26,6 @@ public class EnemySpawner : MonoBehaviour {
             GameObject newEnemy = GameObject.Instantiate(enemyPrefab, new Vector3(posx, posy, 0.0f), Quaternion.identity) as GameObject;
 
             int ranc = (int)((Random.value * 0.99f) * 3);
-            Debug.Log(ranc);
 
             switch(ranc)
             {

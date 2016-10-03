@@ -4,7 +4,8 @@ using System.Collections;
 public class Missile : MonoBehaviour {
 
     public Sprite[] sprites;
-    private float moveSpeed = 0.21f;
+    private float moveSpeed = 12f;
+    private float velocityY = 0.0f;
 
     SpriteRenderer spriteRenderer;
     COLOR missileColor;
@@ -27,6 +28,11 @@ public class Missile : MonoBehaviour {
         }
     }
 
+    public void SetVelocityY(float velY)
+    {
+        velocityY = velY;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +44,7 @@ public class Missile : MonoBehaviour {
 
     protected virtual void MoveMissile()
     {
-        transform.position = new Vector3(transform.position.x + moveSpeed, transform.position.y, transform.position.z);
+        transform.position += new Vector3(moveSpeed * Time.deltaTime, velocityY * Time.deltaTime, 0.0f);
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -20,8 +20,20 @@ public class GameControllerScript : MonoBehaviour {
         GameObject.Instantiate(playerShip, new Vector2(playerSpawnPointX, 5.4f), Quaternion.identity);
     }
 
-    void CompletedLevel() {
+    public void CompletedLevel() {
         Debug.Log("COMPLETED");
         SceneManager.LoadScene("victory");
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("GAME OVER");
+        Invoke("GoToGameOverScreen", 2f);
+        
+    }
+
+    void GoToGameOverScreen()
+    {
+        SceneManager.LoadScene("gameover");
     }
 }
