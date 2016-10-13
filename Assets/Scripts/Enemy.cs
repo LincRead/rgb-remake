@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour {
 
     public void Damage(COLOR missileColor, int damage)
     {
-        if(missileColor == enemyColor)
+        if(missileColor == enemyColor || missileColor == COLOR.ALL)
         {
             HP--;
             if (HP <= 0)

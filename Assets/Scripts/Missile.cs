@@ -25,6 +25,7 @@ public class Missile : MonoBehaviour {
             case COLOR.RED: spriteRenderer.sprite = sprites[0]; break;
             case COLOR.GREEN: spriteRenderer.sprite = sprites[1]; break;
             case COLOR.BLUE: spriteRenderer.sprite = sprites[2]; break;
+            case COLOR.ALL: spriteRenderer.sprite = sprites[3]; break;
         }
     }
 

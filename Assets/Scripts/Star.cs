@@ -11,7 +11,7 @@ public class Star : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        moveSpeed = 20f + (Random.value * 4f);
+        moveSpeed = 15f + (Random.value * 1f);
 	}
 	
 	// Update is called once per frame
@@ -26,7 +26,7 @@ public class Star : MonoBehaviour {
             transform.position = new Vector3(posx, posy, 0.0f);
 
             // Set random sprite
-            int ranSpriteIndex = (int)((Random.value * 0.99f) * 6);
+            int ranSpriteIndex = (int)((Random.value * 0.99f) * starSprites.Length);
             spriteRenderer.sprite = starSprites[ranSpriteIndex];
         }
     }

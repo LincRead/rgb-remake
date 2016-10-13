@@ -5,7 +5,8 @@ public enum COLOR
 {
     RED,
     GREEN,
-    BLUE
+    BLUE,
+    ALL
 };
 
 public class Player : MonoBehaviour {
@@ -70,12 +71,21 @@ public class Player : MonoBehaviour {
         timeSinceLastMissileFire += Time.deltaTime;
         if(timeSinceLastMissileFire >= currTimeBetweenMissileFire)
         {
-            if (Input.GetButton("Fire1"))
-                FireMissile(COLOR.GREEN);
-            else if (Input.GetButton("Fire2"))
-                FireMissile(COLOR.RED);
-            else if (Input.GetButton("Fire3"))
-                FireMissile(COLOR.BLUE);
+            if (currPowerUp == PowerUp.POWERUP.DAMAGE_ALL)
+            {
+                if (Input.GetButton("Fire1") || Input.GetButton("Fire2") || Input.GetButton("Fire3"))
+                    FireMissile(COLOR.ALL);
+            }
+
+            else
+            {
+                if (Input.GetButton("Fire1"))
+                    FireMissile(COLOR.GREEN);
+                else if (Input.GetButton("Fire2"))
+                    FireMissile(COLOR.RED);
+                else if (Input.GetButton("Fire3"))
+                    FireMissile(COLOR.BLUE);
+            }
         }
     }
 
@@ -151,6 +161,11 @@ public class Player : MonoBehaviour {
                         e.GetComponent<Enemy>().Kill();
 
                     currPowerUp = PowerUp.POWERUP.NONE;
+                    break;
+
+                case PowerUp.POWERUP.DAMAGE_ALL:
+                    currPowerUp = PowerUp.POWERUP.DAMAGE_ALL;
+                    timeSincePowerUpActivated = 0.0f;
                     break;
 
                 default:

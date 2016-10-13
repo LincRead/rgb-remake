@@ -14,6 +14,7 @@ public class PowerUp : MonoBehaviour {
         TRIPPLE,
         FAST,
         BOMB,
+        DAMAGE_ALL,
         NONE
     };
 
@@ -29,9 +30,9 @@ public class PowerUp : MonoBehaviour {
 
         switch (ranNum)
         {
-            case 0: spriteRenderer.sprite = sprites[0]; type = POWERUP.FAST; break;
-            case 1: spriteRenderer.sprite = sprites[1]; type = POWERUP.TRIPPLE;  break;
-            case 2: spriteRenderer.sprite = sprites[2]; type = POWERUP.BOMB;  break;
+            case 0: type = POWERUP.DAMAGE_ALL; break;
+            case 1: type = POWERUP.DAMAGE_ALL;  break;
+            case 2: type = POWERUP.DAMAGE_ALL;  break;
         }
     }
 
