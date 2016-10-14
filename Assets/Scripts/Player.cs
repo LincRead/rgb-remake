@@ -26,7 +26,6 @@ public class Player : MonoBehaviour {
     float timePowerUpsLast = 6f;
     float timeSincePowerUpActivated = 0.0f;
 
-
     // Use this for initialization
     void Start () {
         currTimeBetweenMissileFire = timeBetweenMissileFire;

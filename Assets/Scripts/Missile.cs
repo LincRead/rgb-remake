@@ -10,22 +10,29 @@ public class Missile : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     COLOR missileColor;
 
+    [Header("Missile sounds")]
+    public AudioClip red;
+    public AudioClip green;
+    public AudioClip blue;
+    public AudioClip all;
+
     // Use this for initialization
     void Start () {
-
     }
 
     public void SetColor(COLOR color)
     {
         missileColor = color;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        GameObject audioSourceGameObject = new GameObject();
+        AudioSource asource = audioSourceGameObject.AddComponent<AudioSource>();
 
         switch (missileColor)
         {
-            case COLOR.RED: spriteRenderer.sprite = sprites[0]; break;
-            case COLOR.GREEN: spriteRenderer.sprite = sprites[1]; break;
-            case COLOR.BLUE: spriteRenderer.sprite = sprites[2]; break;
-            case COLOR.ALL: spriteRenderer.sprite = sprites[3]; break;
+            case COLOR.RED: spriteRenderer.sprite = sprites[0]; asource.PlayOneShot(red); break;
+            case COLOR.GREEN: spriteRenderer.sprite = sprites[1]; asource.PlayOneShot(green); break;
+            case COLOR.BLUE: spriteRenderer.sprite = sprites[2]; asource.PlayOneShot(blue); break;
+            case COLOR.ALL: spriteRenderer.sprite = sprites[3]; asource.PlayOneShot(all); break;
         }
     }
 
