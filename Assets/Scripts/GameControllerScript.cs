@@ -14,8 +14,6 @@ public class GameControllerScript : MonoBehaviour {
 	}
 
     public void InitLevel() {
-        Debug.Log("Inited level");
-
         // Invoke("CompletedLevel", 3f);
         GameObject.Instantiate(playerShip, new Vector2(playerSpawnPointX, 5.4f), Quaternion.identity);
     }
@@ -34,6 +32,6 @@ public class GameControllerScript : MonoBehaviour {
 
     void GoToGameOverScreen()
     {
-        SceneManager.LoadScene("gameover");
+        SceneManager.LoadScene("idlegame");
     }
 }

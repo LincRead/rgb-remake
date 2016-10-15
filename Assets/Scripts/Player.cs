@@ -23,7 +23,7 @@ public class Player : MonoBehaviour {
 
     // PowerUp
     PowerUp.POWERUP currPowerUp = PowerUp.POWERUP.NONE;
-    float timePowerUpsLast = 6f;
+    float timePowerUpsLast = 4f;
     float timeSincePowerUpActivated = 0.0f;
 
     // Use this for initialization
@@ -72,13 +72,13 @@ public class Player : MonoBehaviour {
         {
             if (currPowerUp == PowerUp.POWERUP.DAMAGE_ALL)
             {
-                if (Input.GetButton("Fire1") || Input.GetButton("Fire2") || Input.GetButton("Fire3"))
+                if (Input.GetButton("Fire2") || Input.GetButton("Fire3") || Input.GetButton("Fire4"))
                     FireMissile(COLOR.ALL);
             }
 
             else
             {
-                if (Input.GetButton("Fire1"))
+                if (Input.GetButton("Fire4"))
                     FireMissile(COLOR.GREEN);
                 else if (Input.GetButton("Fire2"))
                     FireMissile(COLOR.RED);
@@ -111,8 +111,9 @@ public class Player : MonoBehaviour {
             transform.position + new Vector3(spriteRenderer.bounds.size.x / 2, 0f, 0f),
             Quaternion.identity) as GameObject;
         newMissile.GetComponent<Missile>().SetColor(missileColor);
+        newMissile.GetComponent<Missile>().PlayMissileSound();
 
-        if(currPowerUp == PowerUp.POWERUP.TRIPPLE)
+        if (currPowerUp == PowerUp.POWERUP.TRIPPLE)
         {
             // Up
             newMissile = GameObject.Instantiate(missilePrefab,

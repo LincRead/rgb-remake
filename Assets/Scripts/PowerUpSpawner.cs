@@ -25,7 +25,7 @@ public class PowerUpSpawner : MonoBehaviour {
             float sizey = powerUpPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
             float posx = 19.2f + powerUpPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
             float posy = .5f + (sizey / 2) + (Random.value * (10.8f - sizey - 1f));
-            GameObject powerUp = GameObject.Instantiate(powerUpPrefab, new Vector3(posx, posy, 0.0f), Quaternion.identity) as GameObject;
+            GameObject.Instantiate(powerUpPrefab, new Vector3(posx, posy, 0.0f), Quaternion.identity);
         }
     }
 }

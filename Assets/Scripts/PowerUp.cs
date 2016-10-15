@@ -31,8 +31,8 @@ public class PowerUp : MonoBehaviour {
         switch (ranNum)
         {
             case 0: type = POWERUP.DAMAGE_ALL; break;
-            case 1: type = POWERUP.DAMAGE_ALL;  break;
-            case 2: type = POWERUP.DAMAGE_ALL;  break;
+            case 1: type = POWERUP.FAST;  break;
+            case 2: type = POWERUP.TRIPPLE;  break;
         }
     }
 
