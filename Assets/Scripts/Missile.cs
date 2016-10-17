@@ -8,7 +8,7 @@ public class Missile : MonoBehaviour {
     private float velocityY = 0.0f;
 
     SpriteRenderer spriteRenderer;
-    COLOR missileColor;
+    public COLOR missileColor;
 
     [Header("Missile sounds")]
     public AudioClip red;
@@ -28,7 +28,7 @@ public class Missile : MonoBehaviour {
         switch (missileColor)
         {
             case COLOR.RED: spriteRenderer.sprite = sprites[0]; break;
-            case COLOR.GREEN: spriteRenderer.sprite = sprites[1]; break;
+            case COLOR.YELLOW: spriteRenderer.sprite = sprites[1]; break;
             case COLOR.BLUE: spriteRenderer.sprite = sprites[2]; break;
             case COLOR.ALL: spriteRenderer.sprite = sprites[3]; break;
         }
@@ -44,16 +44,24 @@ public class Missile : MonoBehaviour {
         GameObject audioSourceGameObject = new GameObject();
         AudioSource asource = audioSourceGameObject.AddComponent<AudioSource>();
 
+        AudioClip soundClip = red;
+
         if (velocityY == 0)
         {
             switch (missileColor)
             {
-                case COLOR.RED: asource.PlayOneShot(red); break;
-                case COLOR.GREEN: asource.PlayOneShot(green); break;
-                case COLOR.BLUE: asource.PlayOneShot(blue); break;
-                case COLOR.ALL: asource.PlayOneShot(all); break;
+                case COLOR.RED: soundClip = red; break;
+                case COLOR.YELLOW: soundClip = green; break;
+                case COLOR.BLUE: soundClip = blue; break;
+                case COLOR.ALL: soundClip = red; break;
             }
         }
+
+        asource.PlayOneShot(soundClip);
+
+        // Make sure to remove after play
+        audioSourceGameObject.AddComponent<DestroyAfterSoundPlay>();
+        audioSourceGameObject.GetComponent<DestroyAfterSoundPlay>().SetDuration(soundClip.length);
     }
 
     // Update is called once per frame

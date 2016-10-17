@@ -16,6 +16,8 @@ public class PlayStoryVideo : MonoBehaviour
 
     public string nextScene = "";
 
+    public bool playAtInit = false;
+
     // Use this for initialization
     void Awake()
     {
@@ -25,6 +27,9 @@ public class PlayStoryVideo : MonoBehaviour
         r = GetComponent<Renderer>();
         movie = (MovieTexture)r.material.mainTexture;
         movie.Stop();
+
+        if (playAtInit)
+            PlayVideo();
     }
 
     public void PlayVideo()
@@ -41,7 +46,7 @@ public class PlayStoryVideo : MonoBehaviour
 
     void Update()
     {
-        if (PressingAnyFireButton())
+        /* if (PressingAnyFireButton())
         {
             if (movie.isPlaying)
             {
@@ -50,9 +55,9 @@ public class PlayStoryVideo : MonoBehaviour
                 else
                     Destroy(gameObject);
             }
-        }
+        } */
 
-        else if(startedPlayingVideo)
+        if(startedPlayingVideo)
         {
             timeSincePlay += Time.deltaTime;
             if(timeSincePlay > duration)

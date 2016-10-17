@@ -4,13 +4,12 @@ using System.Collections;
 public class BackGroundBarMovement : MonoBehaviour {
 
     SpriteRenderer spriteRenderer;
-    float moveSpeed = 2f;
+    public float moveSpeed = 20f;
 
     // Use this for initialization
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        moveSpeed = 5f; // + (Random.value * 1f);
     }
 
     // Update is called once per frame
@@ -21,6 +20,6 @@ public class BackGroundBarMovement : MonoBehaviour {
         Bounds b = spriteRenderer.bounds;
 
         if (b.max.x < 0)
-            transform.position = new Vector3(19.2f + (b.size.x / 2), transform.position.y, 0.0f);
+            transform.position = new Vector3(19.2f + 1.5f, transform.position.y, 0.0f);
     }
 }

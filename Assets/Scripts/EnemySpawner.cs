@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour {
             switch(ranc)
             {
                 case 0: newEnemy.GetComponent<Enemy>().SetColor(COLOR.RED); break;
-                case 1: newEnemy.GetComponent<Enemy>().SetColor(COLOR.GREEN); break;
+                case 1: newEnemy.GetComponent<Enemy>().SetColor(COLOR.YELLOW); break;
                 case 2: newEnemy.GetComponent<Enemy>().SetColor(COLOR.BLUE); break;
                 default: newEnemy.GetComponent<Enemy>().SetColor(COLOR.RED); break;
             }

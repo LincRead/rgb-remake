@@ -6,19 +6,19 @@ public class Star : MonoBehaviour {
     public Sprite[] starSprites;
 
     SpriteRenderer spriteRenderer;
-    float moveSpeed = 1f;
+    public float moveSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        moveSpeed = 15f + (Random.value * 1f);
+        moveSpeed = moveSpeed + (Random.value * 1f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         transform.position -= new Vector3(moveSpeed * Time.deltaTime, 0.0f, 0.0f);
 
-        if(transform.position.x - spriteRenderer.bounds.size.x < 0)
+        if(transform.position.x + (spriteRenderer.bounds.size.x / 2) < 0)
         {
             float sizey = spriteRenderer.bounds.size.y;
             float posx = 19.2f + (spriteRenderer.bounds.size.x * 2);

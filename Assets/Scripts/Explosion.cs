@@ -28,5 +28,7 @@ public class Explosion : MonoBehaviour {
             GameObject pixel = GameObject.Instantiate(explosionPixelPrefab, newPos, Quaternion.identity) as GameObject;
             pixel.GetComponent<ExplosionPixel>().Setup(dir, color);
         }
+
+        Destroy(gameObject);
     }
 }

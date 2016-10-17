@@ -4,7 +4,7 @@ using System.Collections;
 public class PowerUp : MonoBehaviour {
 
     public Sprite[] sprites;
-    public float moveSpeed = 1f;
+    public float moveSpeed = .8f;
 
     POWERUP type;
     SpriteRenderer spriteRenderer;

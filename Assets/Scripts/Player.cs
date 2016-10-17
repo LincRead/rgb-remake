@@ -4,7 +4,7 @@ using System.Collections;
 public enum COLOR
 {
     RED,
-    GREEN,
+    YELLOW,
     BLUE,
     ALL
 };
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour {
 
     // PowerUp
     PowerUp.POWERUP currPowerUp = PowerUp.POWERUP.NONE;
-    float timePowerUpsLast = 4f;
+    float timePowerUpsLast = 5f;
     float timeSincePowerUpActivated = 0.0f;
 
     // Use this for initialization
@@ -37,6 +37,9 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (GameObject.FindGameObjectsWithTag("VideoStory").Length != 0)
+            return;
+
         MoveShip();
         KeepWithinScreenRectangle();
         HandleFireButtons();
@@ -79,7 +82,7 @@ public class Player : MonoBehaviour {
             else
             {
                 if (Input.GetButton("Fire4"))
-                    FireMissile(COLOR.GREEN);
+                    FireMissile(COLOR.YELLOW);
                 else if (Input.GetButton("Fire2"))
                     FireMissile(COLOR.RED);
                 else if (Input.GetButton("Fire3"))
@@ -108,7 +111,7 @@ public class Player : MonoBehaviour {
     void FireMissile(COLOR missileColor)
     {
         GameObject newMissile = GameObject.Instantiate(missilePrefab,
-            transform.position + new Vector3(spriteRenderer.bounds.size.x / 2, 0f, 0f),
+            transform.position + new Vector3(1.0f, -0.05f, 0f),
             Quaternion.identity) as GameObject;
         newMissile.GetComponent<Missile>().SetColor(missileColor);
         newMissile.GetComponent<Missile>().PlayMissileSound();
@@ -139,6 +142,11 @@ public class Player : MonoBehaviour {
         {
             Destroy();
             other.GetComponent<Enemy>().Kill();
+        }
+
+        if (other.gameObject.tag == "Boss")
+        {
+            Destroy();
         }
 
         if (other.gameObject.tag == "PowerUp")

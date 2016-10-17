@@ -19,13 +19,11 @@ public class GameControllerScript : MonoBehaviour {
     }
 
     public void CompletedLevel() {
-        Debug.Log("COMPLETED");
         SceneManager.LoadScene("victory");
     }
 
     public void GameOver()
     {
-        Debug.Log("GAME OVER");
         Invoke("GoToGameOverScreen", 2f);
         
     }
