@@ -30,6 +30,8 @@ public class PlayMoreVideo : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = videoAudio;
 
+        r.enabled = false;
+
         if (playOnStart)
             Play(true);
         else
@@ -43,6 +45,10 @@ public class PlayMoreVideo : MonoBehaviour
         if (videoPlaying.isPlaying)
             return;
 
+        transform.position = new Vector3(9.6f, 5.4f, -1);
+        r.enabled = true;
+
+        videoPlaying.Stop();
         videoPlaying.Play();
         audioSource.Play();
     }
@@ -54,7 +60,7 @@ public class PlayMoreVideo : MonoBehaviour
 
         if (!videoPlaying.isPlaying)
         {
-            transform.position = new Vector3(0, 0, 0);
+            transform.position = new Vector3(9.6f, 5.4f, 1);
         }
     }
 
@@ -67,5 +73,10 @@ public class PlayMoreVideo : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    public float GetDuration()
+    {
+        return videoPlaying.duration;
     }
 }

@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     COLOR enemyColor;
 
-	// Use this for initialization
 	void Start () {
 
     }
@@ -29,7 +28,6 @@ public class Enemy : MonoBehaviour {
         }
     }
 	
-	// Update is called once per frame
 	void Update () {
         MoveEnemy();
 
@@ -57,6 +55,6 @@ public class Enemy : MonoBehaviour {
         Destroy(gameObject);
 
         GameObject explosionEffect = GameObject.Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
-        explosionEffect.GetComponent<Explosion>().CreateExplosion(enemyColor, 0.3f, 12);
+        explosionEffect.GetComponent<Explosion>().PlayExplosion(enemyColor);
     }
 }

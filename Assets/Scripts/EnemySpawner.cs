@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour {
     // Use this for initialization
     void Start () {
         timeBetweenEnemySpawn = maxTimeBetweenEnemiesSpawn;
-
+        timeSinceLastEnemySpawned = -3.5f; // Wait a bit before first enemy spawn
     }
 	
 	// Update is called once per frame
@@ -60,12 +60,12 @@ public class EnemySpawner : MonoBehaviour {
             }
         }
 
-        timeBetweenEnemySpawn -= ((decreaseTimePerMin * Time.deltaTime) / 60);
+        timeBetweenEnemySpawn -= ((decreaseTimePerMin * Time.deltaTime) / 65);
         if(timeBetweenEnemySpawn <= minTimeBetweenEnemiesSpawn)
         {
             timeBetweenEnemySpawn = minTimeBetweenEnemiesSpawn;
 
-            // Finished enemies!
+            // Finished spawning enemies before Boss!
             doneSpawningEnemie = true;
         }
     }

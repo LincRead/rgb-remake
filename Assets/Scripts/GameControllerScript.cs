@@ -8,13 +8,11 @@ public class GameControllerScript : MonoBehaviour {
     public GameObject playerShip;
     public float playerSpawnPointX;
 
-	// Use this for initialization
 	void Start () {
         InitLevel();
 	}
 
     public void InitLevel() {
-        // Invoke("CompletedLevel", 3f);
         GameObject.Instantiate(playerShip, new Vector2(playerSpawnPointX, 5.4f), Quaternion.identity);
     }
 
@@ -24,12 +22,19 @@ public class GameControllerScript : MonoBehaviour {
 
     public void GameOver()
     {
-        Invoke("GoToGameOverScreen", 2f);
-        
+        if (GameObject.FindGameObjectsWithTag("Boss").Length == 0)
+            Invoke("GoToGameOverScreen", 2f);
+        else
+            Invoke("RestartBoss", 2f);
     }
 
     void GoToGameOverScreen()
     {
         SceneManager.LoadScene("idlegame");
+    }
+
+    void RestartBoss()
+    {
+        SceneManager.LoadScene("boss");
     }
 }

@@ -6,10 +6,10 @@ public class PowerUp : MonoBehaviour {
     public Sprite[] sprites;
     public float moveSpeed = .8f;
 
-    POWERUP type;
+    POWERUP_TYPE type;
     SpriteRenderer spriteRenderer;
 
-    public enum POWERUP
+    public enum POWERUP_TYPE
     {
         TRIPPLE,
         FAST,
@@ -30,16 +30,18 @@ public class PowerUp : MonoBehaviour {
 
         switch (ranNum)
         {
-            case 0: type = POWERUP.DAMAGE_ALL; break;
-            case 1: type = POWERUP.FAST;  break;
-            case 2: type = POWERUP.TRIPPLE;  break;
+            case 0: type = POWERUP_TYPE.DAMAGE_ALL; spriteRenderer.sprite = sprites[2]; break;
+            case 1: type = POWERUP_TYPE.FAST; spriteRenderer.sprite = sprites[0]; break;
+            case 2: type = POWERUP_TYPE.TRIPPLE; spriteRenderer.sprite = sprites[1]; break;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         MovePowerUp();
+
+        float scale = 1.2f + (Mathf.Sin(Time.time * 5f) * 0.2f);
+        transform.localScale = new Vector3(scale, scale, scale);
 
         if (transform.position.x + spriteRenderer.bounds.size.x / 2 < 0)
             Destroy(gameObject);
@@ -55,7 +57,7 @@ public class PowerUp : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public POWERUP GetPowerUpType()
+    public POWERUP_TYPE GetPowerUpType()
     {
         return type;
     } 

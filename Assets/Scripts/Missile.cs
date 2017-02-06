@@ -16,9 +16,7 @@ public class Missile : MonoBehaviour {
     public AudioClip blue;
     public AudioClip all;
 
-    // Use this for initialization
-    void Start () {
-    }
+    void Start () { }
 
     public void SetColor(COLOR color)
     {
@@ -59,12 +57,11 @@ public class Missile : MonoBehaviour {
 
         asource.PlayOneShot(soundClip);
 
-        // Make sure to remove after play
+        // Make sure to remove after sound has finished playing
         audioSourceGameObject.AddComponent<DestroyAfterSoundPlay>();
         audioSourceGameObject.GetComponent<DestroyAfterSoundPlay>().SetDuration(soundClip.length);
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveMissile();

@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: fea6d627c363e6b43aacc6e1f430bbb2
-timeCreated: 1476360058
+guid: 5a0f4a3694bb11348b5a8e38759a29a5
+timeCreated: 1476827824
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: missiles_126x33_0
-    21300002: missiles_126x33_1
-    21300004: missiles_126x33_2
-    21300006: missiles_126x33_3
+    21300000: missiles_126x33_new_0
+    21300002: missiles_126x33_new_1
+    21300004: missiles_126x33_new_2
+    21300006: missiles_126x33_new_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,7 +57,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: missiles_126x33_0
+      name: missiles_126x33_new_0
       rect:
         serializedVersion: 2
         x: 0
@@ -70,7 +70,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: missiles_126x33_1
+      name: missiles_126x33_new_1
       rect:
         serializedVersion: 2
         x: 0
@@ -83,7 +83,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: missiles_126x33_2
+      name: missiles_126x33_new_2
       rect:
         serializedVersion: 2
         x: 0
@@ -96,7 +96,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: missiles_126x33_3
+      name: missiles_126x33_new_3
       rect:
         serializedVersion: 2
         x: 0

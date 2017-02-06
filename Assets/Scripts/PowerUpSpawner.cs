@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PowerUpSpawner : MonoBehaviour {
 
-    public float timeBetweenPowerUpSpawn = .8f;
+    public float timeBetweenPowerUpSpawn = 8f;
     public GameObject powerUpPrefab;
 
     float timeSinceLastPowerUpSpawned = 0.0f;
@@ -18,7 +18,9 @@ public class PowerUpSpawner : MonoBehaviour {
     void Update()
     {
         timeSinceLastPowerUpSpawned += Time.deltaTime;
-        if (timeSinceLastPowerUpSpawned > timeBetweenPowerUpSpawn)
+
+        // Time to spawn new powerup
+        if (timeSinceLastPowerUpSpawned >= timeBetweenPowerUpSpawn)
         {
             timeSinceLastPowerUpSpawned = 0.0f;
 

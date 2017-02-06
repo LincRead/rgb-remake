@@ -3,32 +3,46 @@ using System.Collections;
 
 public class Explosion : MonoBehaviour {
 
-    public GameObject explosionPixelPrefab;
-    public float fadeOutSpeed = 0.5f;
+    public float duratiom = 0.583f;
+    float timeSinceSpawn = 0.0f;
+    public AudioClip[] soundClips;
+    Animator animator;
 
     // Use this for initialization
     void Start () {
-
+        
     }
 
-    public void CreateExplosion(COLOR color, float radius, int numPixels)
+    public void PlayExplosion(COLOR colorType)
     {
-        Vector3 pos = transform.position;
-
-        for (int i = 0; i < numPixels; i++)
+        animator = GetComponent<Animator>();
+        switch (colorType)
         {
-            int ang = i * (360 / numPixels);
-            Vector3 newPos = new Vector3(
-                pos.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad),
-                pos.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad),
-                pos.z);
-
-            Vector3 dir = (newPos - transform.position).normalized;
-
-            GameObject pixel = GameObject.Instantiate(explosionPixelPrefab, newPos, Quaternion.identity) as GameObject;
-            pixel.GetComponent<ExplosionPixel>().Setup(dir, color);
+            case COLOR.RED: animator.Play("redexp"); break;
+            case COLOR.YELLOW: animator.Play("yellowexp"); break;
+            case COLOR.BLUE: animator.Play("blueexp"); break;
+            case COLOR.ALL: animator.Play("allexp"); break;
         }
 
-        Destroy(gameObject);
+        PlaySound();
+    }
+
+    void Update()
+    {
+        timeSinceSpawn += Time.deltaTime;
+        if(timeSinceSpawn > duratiom)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void PlaySound()
+    {
+        int num = (int)((Random.value * 0.99f) * soundClips.Length);
+        GameObject audioSourceGameObject = new GameObject();
+        AudioSource asource = audioSourceGameObject.AddComponent<AudioSource>();
+        asource.PlayOneShot(soundClips[num]);
+        audioSourceGameObject.AddComponent<DestroyAfterSoundPlay>();
+        audioSourceGameObject.GetComponent<DestroyAfterSoundPlay>().SetDuration(soundClips[num].length);
     }
 }

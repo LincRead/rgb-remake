@@ -6,13 +6,11 @@ public class BackGroundBarMovement : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     public float moveSpeed = 20f;
 
-    // Use this for initialization
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position -= new Vector3(moveSpeed * Time.deltaTime, 0.0f, 0.0f);

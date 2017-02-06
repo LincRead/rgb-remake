@@ -6,7 +6,7 @@ public class BossObjectScript : MonoBehaviour
     public GameObject explosionPrefab;
     public COLOR colorType;
 
-    int hp = 10;
+    int hp = 12;
 
     // Use this for initialization
     void Start()
@@ -38,7 +38,7 @@ public class BossObjectScript : MonoBehaviour
         hp--;
 
         GameObject explosionEffect = GameObject.Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
-        explosionEffect.GetComponent<Explosion>().CreateExplosion(colorType, 0.3f, 12);
+        explosionEffect.GetComponent<Explosion>().PlayExplosion(colorType);
 
         if (hp <= 0)
         {

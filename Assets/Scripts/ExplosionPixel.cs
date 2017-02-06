@@ -14,7 +14,6 @@ public class ExplosionPixel : MonoBehaviour {
 
     SpriteRenderer spriteRenderer;
 
-    // Use this for initialization
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -25,8 +24,6 @@ public class ExplosionPixel : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         this.velocity = velocity;
-
-        // Rotate towards direction
 
         SetColor(color);
     }
@@ -46,7 +43,6 @@ public class ExplosionPixel : MonoBehaviour {
         colorValues = spriteRenderer.color;
     }
 
-    // Update is called once per frame
     void Update()
     {
         alphaValue -= fadeOutSpeed * Time.deltaTime;
